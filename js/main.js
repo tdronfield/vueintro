@@ -1,4 +1,22 @@
+import { fetchData } from "./components/TheDataMiner.js"
+
 (() => {
+    Vue.component("prof-card", {
+        props: ["item"],
+
+        template: `<li>
+                        <p>Prof Name: {{ item.name }}</p>
+
+                        <a href="" class="remove-prof">Show {{ item.name }}'s Info</a>
+                        <a href="" class="remove-prof">Remove {{ item.name }}</a>
+
+                    </li>`,
+
+        created: function() {
+            console.log('Loaded a prof card');
+        }
+    });
+
     let vue_vm = new Vue({
         // link to an element in HTML
         // el: "#app",
@@ -7,12 +25,15 @@
             message: "Hello from Vue",
             removeAformat: true,
             showBioData: false,
+            professors: [],
+            currentProfData: {},
 
-            collection: [
-                { name: "Justin", role:"coordinator", nickname: "nitsuj"},
-                { name: "Joe", role:"prof", nickname: "Teddy"},
-                { name: "Pan", role:"code ninja", nickname: "Spiderpan"},
-            ]
+        
+            // collection: [
+            //     { name: "Justin", role:"coordinator", nickname: "nitsuj"},
+            //     { name: "Joe", role:"prof", nickname: "Teddy"},
+            //     { name: "Pan", role:"code ninja", nickname: "Spiderpan"},
+            // ],
         },
 
         // "mounted" is a vue lifecycle hook. When vue is done creating itself,
@@ -26,7 +47,7 @@
         // "Updated" is it's own lifecycle Hook.
         // run a method when we change our view (update the DOM)
         updated: function() {
-            console.log("Vue updated then DOM");
+            console.log("Vue updated the DOM");
         },
 
         methods: {
