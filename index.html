@@ -12,12 +12,14 @@
 <body>
     <main id="app">
         <h1 @click="clickHeader">{{message}}</h1>
-
+        <!-- This is a custom VUE component - defined in main.js -->
+        
         <ul>
-            <li v-for="item in collection">
+            <prof-card v-for="item in collection" :item="item" :key="item.id"></prof-card>
+            <!-- <li v-for="item in collection">
                 <p>Prof Name: {{ item.name }}, Prof Role: {{ item.role }}</p>
                 <a href="" class="remove-prof" @click.prevent="removeProf(item)" :class="{'prof-button-modifier' : removeAformat}">Remove {{ item.name }}</a>
-            </li>
+            </li> -->
         </ul>
 
         <section class="bio-data" :class="{'show-bio' : showBioData}">
