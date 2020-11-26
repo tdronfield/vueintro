@@ -1,22 +1,8 @@
-import { fetchData } from "./components/TheDataMiner.js"
+import { fetchData } from "./components/TheDataMiner.js";
+import ProfCard from "./components/TheProfCard.js";
 
 (() => {
-    Vue.component("prof-card", {
-        props: ["item"],
-
-        template: `<li>
-                        <p>Prof Name: {{ item.name }}</p>
-
-                        <a href="" class="remove-prof">Show {{ item.name }}'s Info</a>
-                        <a href="" class="remove-prof">Remove {{ item.name }}</a>
-
-                    </li>`,
-
-        created: function() {
-            console.log('Loaded a prof card');
-        }
-    });
-
+   
     let vue_vm = new Vue({
         // link to an element in HTML
         // el: "#app",
@@ -41,7 +27,9 @@ import { fetchData } from "./components/TheDataMiner.js"
         mounted: function() {
             console.log("Vue is mounted");
 
-            this.collection.push({name: "Jarrod", role: "prof", nickname: "J"})
+            fetchData("includes/index.php");
+
+            // this.collection.push({name: "Jarrod", role: "prof", nickname: "J"})
         },
 
         // "Updated" is it's own lifecycle Hook.
@@ -66,7 +54,11 @@ import { fetchData } from "./components/TheDataMiner.js"
                 // toggle the property between true and false using a ternary statement
                 this.showBioData = this.showBioData ? false: true
             }
-        }
+        },
+
+        components: {
+            "prof-card": ProfCard
+        } 
     }).$mount("#app"); // also connects Vue to your wrapper in HTML
 
 })();
