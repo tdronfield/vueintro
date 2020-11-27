@@ -11,25 +11,31 @@ import ProfCard from "./components/TheProfCard.js";
             message: "Hello from Vue",
             removeAformat: true,
             showBioData: false,
-            professors: [],
-            currentProfData: {},
+            collection: [],
+            currentItemData: {},
 
         
             // collection: [
             //     { name: "Justin", role:"coordinator", nickname: "nitsuj"},
             //     { name: "Joe", role:"prof", nickname: "Teddy"},
             //     { name: "Pan", role:"code ninja", nickname: "Spiderpan"},
-            // ],
+            // ]
         },
 
         // "mounted" is a vue lifecycle hook. When vue is done creating itself,
         //it attaches to the "app" (main) element on the page.
         mounted: function() {
-            console.log("Vue is mounted");
+            console.log("Vue is mounted, trying to fetch for initial data");
 
-            fetchData("includes/index.php");
+            // fetchData("./includes/index.php").then(data => console.log(data)).catch(err => console.error(err));
+            fetchData("./includes/index.php")
+                .then(data => {
+                    data.forEach(item => this.collection.push(item));
+                    
+                })
+                .catch(err => console.error(err));
 
-            // this.collection.push({name: "Jarrod", role: "prof", nickname: "J"})
+
         },
 
         // "Updated" is it's own lifecycle Hook.
@@ -48,11 +54,15 @@ import ProfCard from "./components/TheProfCard.js";
             },
 
             removeProf(target){
-                console.log("Clicked to remove prof", target, target.name);
+                console.log("Clicked to view prof bio data", target, target.name);
                 //the this keyword inside a vue instance REFERS to the vue instance itself by default
 
                 // toggle the property between true and false using a ternary statement
-                this.showBioData = this.showBioData ? false: true
+                this.showBioData = this.showBioData ? false: true;
+
+                // make the selected profs data visible
+                this.currentItemData = target;
+
             }
         },
 
