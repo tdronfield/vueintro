@@ -16,14 +16,15 @@
         
         <ul>
             <prof-card v-for="item in collection" :item="item" :key="item.id"></prof-card>
-            <!-- <li v-for="item in collection">
+            <li v-for="item in collection">
                 <p>Prof Name: {{ item.name }}, Prof Role: {{ item.role }}</p>
                 <a href="" class="remove-prof" @click.prevent="removeProf(item)" :class="{'prof-button-modifier' : removeAformat}">Remove {{ item.name }}</a>
-            </li> -->
+            </li>
         </ul>
 
         <section class="bio-data" :class="{'show-bio' : showBioData}">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, reprehenderit! Mollitia aliquam cumque fugit quasi commodi nisi veniam perferendis, tenetur nobis dolor, excepturi autem, doloribus quod praesentium laudantium error quia?</p>
+            <h1>{{ currentItemData.name }}</h1>
+            <p>{{ currentItemData.nickname }}</p>
         </section>
     </main>
     <script src="js/main.js" type="module"></script>
